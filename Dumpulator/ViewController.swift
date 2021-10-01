@@ -9,8 +9,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var resultNumber: String = "0"
-    var lastNumber: String = "0"
+    var resultString: String = ""
+    var resultDouble: Double = 0.0
+    var lastNumber: Double = 0.0
     var currentMode = ""
     let preResultNumber: Double? = nil
     var buttons = [0: "1", 1: "2", 2: "3", 3: "/", 4 : "4", 5 : "5", 6 : "6", 7 : "*", 8 : "7", 9 : "8", 10: "9", 11: "-", 12: "0", 13: ",", 14: "=", 15 : "+"]
@@ -18,7 +19,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resultDisplay.text? = resultNumber
+        resultDisplay.text? = resultString
     }
 
     // Elements
@@ -91,8 +92,8 @@ class ViewController: UIViewController {
         button13.setTitle(buttons[13], for: .normal)
         button14.setTitle(buttons[14], for: .normal)
         button15.setTitle(buttons[15], for: .normal)
-        resultNumber = "0"
-        lastNumber = ""
+        resultString = ""
+        lastNumber = 0.0
         currentMode = ""
         updateDisplay()
     }
@@ -116,12 +117,22 @@ class ViewController: UIViewController {
     
     // Functions
     func updateDisplay() {
-        resultDisplay.text? = String(round(Double(resultNumber)! * 1000) / 1000.0)
+        var output = resultString
+        output = output.replacingOccurrences(of: ".", with: ",")
+        resultDisplay.text? = output
     }
     
     func markButton() {
         // Step 1: unmark old Button
         // Step 2: mark new Button
+    }
+    
+    func convertString() {
+        if (Double(Int(resultDouble)) - resultDouble) == 0 {
+            resultString = String(Int(resultDouble))
+        } else {
+            resultString = String(resultDouble)
+        }
     }
     
     func switchButtons() {
@@ -145,87 +156,89 @@ class ViewController: UIViewController {
         button13.setTitle(buttons[13], for: .normal)
         button14.setTitle(buttons[14], for: .normal)
         button15.setTitle(buttons[15], for: .normal)
-        
-        
     }
     
     func calculate(opearation: String) {
         switch opearation {
         case "+" :
-            resultNumber = String(Double(lastNumber)! + Double(resultNumber)!)
+            resultDouble = lastNumber + resultDouble
+            resultString = String(resultDouble)
+            convertString()
             updateDisplay()
-            switchButtons()
         case "-" :
-            resultNumber = String(Double(lastNumber)! - Double(resultNumber)!)
+            resultDouble = lastNumber - resultDouble
+            resultString = String(resultDouble)
+            convertString()
             updateDisplay()
-            switchButtons()
         case "*" :
-            resultNumber = String(Double(lastNumber)! * Double(resultNumber)!)
+            resultDouble = lastNumber * resultDouble
+            resultString = String(resultDouble)
+            convertString()
             updateDisplay()
-            switchButtons()
         case "/" :
-            resultNumber = String(Double(lastNumber)! / Double(resultNumber)!)
+            resultDouble = lastNumber / resultDouble
+            resultString = String(resultDouble)
+            convertString()
             updateDisplay()
-            switchButtons()
         case "=" :
-            //resultNumber = String(Double(lastNumber)! + Double(resultNumber)!)
             updateDisplay()
-            switchButtons()
         case ""  :
-            //resultNumber = String(Double(lastNumber)! + Double(resultNumber)!)
             updateDisplay()
-            switchButtons()
         default :
             print("Fehler!!!")
             
         }
     }
     
-    
     func pressButton(id: Int) {
-        // Step 1: Aktion ausführen
         if (Int(buttons[id]!) != nil) {
-            resultNumber += String(buttons[id]!)
+            if currentMode == "=" {
+                resultString = ""
+                currentMode = ""
+            }
+            resultString += String(buttons[id]!)
+            resultDouble = Double(resultString)!
             updateDisplay()
             
         } else if buttons[id] == "=" {
             calculate(opearation: currentMode)
             markButton()
             currentMode = "="
-            lastNumber = "0"
+            lastNumber = 0.0
         } else if buttons[id] == "," {
-            print(resultNumber)
-            if !resultNumber.contains(".") {
-                resultNumber += "."
+            if !resultString.contains(".") {
+                resultString += "."
                 updateDisplay()
             }
+            //switchButtons()
         } else if buttons[id] == "+" {
             calculate(opearation: currentMode)
             markButton()
             currentMode = "+"
-            lastNumber = resultNumber
-            resultNumber = ""
+            lastNumber = resultDouble
+            resultString = ""
+            switchButtons()
         } else if buttons[id] == "-" {
             calculate(opearation: currentMode)
             markButton()
             currentMode = "-"
-            lastNumber = resultNumber
-            resultNumber = ""
+            lastNumber = resultDouble
+            resultString = ""
+            switchButtons()
         } else if buttons[id] == "*" {
             calculate(opearation: currentMode)
             markButton()
             currentMode = "*"
-            lastNumber = resultNumber
-            resultNumber = ""
+            lastNumber = resultDouble
+            resultString = ""
+            switchButtons()
         } else if buttons[id] == "/" {
             calculate(opearation: currentMode)
             markButton()
             currentMode = "/"
-            lastNumber = resultNumber
-            resultNumber = ""
+            lastNumber = resultDouble
+            resultString = ""
+            switchButtons()
         }
-        // Step 2: Alle Buttons mischen
     }
-
 }
-
