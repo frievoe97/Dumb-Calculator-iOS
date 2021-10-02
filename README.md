@@ -35,26 +35,7 @@ E-Mail-Adresse: [friedrich.voelkers@me.com](mailto:friedrich.voelkers@me.com).
 
 ## Übersicht der Verarbeitungen
 
-Die nachfolgende Übersicht fasst die Arten der verarbeiteten Daten und die Zwecke ihrer Verarbeitung zusammen und verweist auf die betroffenen Personen.
-
-### Arten der verarbeiteten Daten
-
-*   Bestandsdaten (z.B. Namen, Adressen).
-*   Inhaltsdaten (z.B. Eingaben in Onlineformularen).
-*   Kontaktdaten (z.B. E-Mail, Telefonnummern).
-*   Meta-/Kommunikationsdaten (z.B. Geräte-Informationen, IP-Adressen).
-*   Nutzungsdaten (z.B. besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten).
-
-### Kategorien betroffener Personen
-
-*   Kommunikationspartner.
-*   Nutzer (z.B. Webseitenbesucher, Nutzer von Onlinediensten).
-
-### Zwecke der Verarbeitung
-
-*   Bereitstellung unseres Onlineangebotes und Nutzerfreundlichkeit.
-*   Direktmarketing (z.B. per E-Mail oder postalisch).
-*   Kontaktanfragen und Kommunikation.
+Es werden keine personenbezogenen Daten erhoben
 
 ### Maßgebliche Rechtsgrundlagen
 
