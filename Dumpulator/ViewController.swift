@@ -175,7 +175,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     
     func convertString() {
         let tempResultDouble = resultDouble
-        if resultDouble > 999999999.0 || resultDouble < 0.00000001 {
+        if resultDouble > 999999999.0 || (resultDouble < 0.00000001 && resultDouble > -0.00000001) || resultDouble < -999999999 {
             resultString = tempResultDouble.scientificFormatted
             rounded = true
         } else if checkIfNumberIsToLong(number: String(resultDouble), tryToAdd: false) {
@@ -486,7 +486,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     
     func resetMenu() {
         resetAll()
-        showAlert(name: "Hinweis!", text: "Der Dumpulator wird wieder zurückgesetzt.")
+        showAlert(name: "Info", text: "The \"Dumpulator\" is reset again.")
     }
     
     func visitGitHUb() {
