@@ -100,16 +100,12 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var button14: UIButton!
     @IBOutlet weak var button15: UIButton!
     
-    //@IBOutlet weak var roundedWarning: UITextField!
-    
     @IBOutlet weak var menuButton: UIButton!
     @IBAction func pressMenuButton(_ sender: Any) {
         showMenu()
     }
     
     @IBOutlet weak var roundedWarning: UIImageView!
-    
-    //@IBOutlet weak var roundedWarning: UITextField!
     
     // Functions
     func updateDisplay(showDecimalpoint: Bool) {
@@ -284,7 +280,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
         case "/" :
             if resultDouble == 0.0 {
                 resetAll()
-                showAlert(name: "Fehler!", text: "Es ist nicht erklaubt durch 0 zu teilen! Der Dumpulator wird wieder zurückgesetzt.")
+                showAlert(name: "Error!", text: "It is not allowed to divide by zero! The \"Dumpulator\" is reset again.")
             } else {
                 resultDouble = lastNumber / resultDouble
                 resultString = String(resultDouble)
@@ -300,7 +296,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
             updateDisplay(showDecimalpoint: false)
         default :
             resetAll()
-            showAlert(name: "Fehler!", text: "Falsche Eingabe! Der Dumpulator wird wieder zurückgesetzt.")
+            showAlert(name: "Error!", text: "Incorrect input! The \"Dumpulator\" is reset again.")
         }
     }
     
@@ -422,7 +418,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     func showAlert(name: String, text: String) {
         let alert = UIAlertController(title: name, message: text, preferredStyle: UIAlertController.Style.alert)
 
-        alert.addAction(UIAlertAction(title: "Alles klar!",
+        alert.addAction(UIAlertAction(title: "Okay!",
                                       style: UIAlertAction.Style.default,
                                       handler: { _ in}
                                      ))
@@ -430,16 +426,16 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func showMenu() {
-        let alert = UIAlertController(title: "Menü", message: "Hinweis: Wenn der rote Punkt leuchtet, ist das angezeigte Ergebnis gerundet. Es wird mit dem nicht gerundeten Ergebnis weitergerechnet.", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Menu", message: "Note: If the red dot is lit, the displayed result is rounded. The calculation is continued with the non-rounded result.", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Informationen",
                                       style: UIAlertAction.Style.default,
                                       handler: {[self](alert: UIAlertAction!) in self.showInformations()}
                                      ))
-        alert.addAction(UIAlertAction(title: "Darstellungsoptionen",
+        alert.addAction(UIAlertAction(title: "Display options",
                                       style: UIAlertAction.Style.default,
                                       handler: {[self](alert: UIAlertAction!) in self.showSetting()}
                                      ))
-        alert.addAction(UIAlertAction(title: "Zurück",
+        alert.addAction(UIAlertAction(title: "Back",
                                       style: UIAlertAction.Style.default,
                                       handler: { _ in}
                                      ))
@@ -451,15 +447,17 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func showInformations() {
-        let alert = UIAlertController(title: "Informationen", message: "Das Projekt \"Dumpulator\" ist ein Open Source Projekt. Bei Fragen, Hinweisen oder Fehlern senden Sie gerne eine E-Mail und für die Weiterentwicklung kann ein Pull-Request im GitHub Repository erstellt werden.", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Zurück",
+        let alert = UIAlertController(title: "Information", message: "The project \"Dumpulator\" is an open source project. For further development a pull request can be created in the GitHub repository.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Back",
                                       style: UIAlertAction.Style.default,
                                       handler: { _ in}
                                      ))
+        /*
         alert.addAction(UIAlertAction(title: "E-Mail",
                                       style: UIAlertAction.Style.default,
                                       handler: {[self](alert: UIAlertAction!) in self.sendEmail()}
                                      ))
+         */
         alert.addAction(UIAlertAction(title: "GitHub Repository",
                                       style: UIAlertAction.Style.default,
                                       handler: {[self](alert: UIAlertAction!) in self.visitGitHUb()}
@@ -469,16 +467,16 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func showSetting() {
-        let alert = UIAlertController(title: "Darstellungsoptionen", message: "", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Automatisch",
+        let alert = UIAlertController(title: "Display options", message: "", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Automattic",
                                       style: UIAlertAction.Style.default,
                                       handler: {[self](alert: UIAlertAction!) in self.autoDarkmode()}
                                      ))
-        alert.addAction(UIAlertAction(title: "Helles Erscheinungsbild",
+        alert.addAction(UIAlertAction(title: "Bright appearanced",
                                       style: UIAlertAction.Style.default,
                                       handler: {[self](alert: UIAlertAction!) in self.onlyBright()}
                                      ))
-        alert.addAction(UIAlertAction(title: "Dunkles Erscheinungsbild",
+        alert.addAction(UIAlertAction(title: "Dark appearance",
                                       style: UIAlertAction.Style.default,
                                       handler: {[self](alert: UIAlertAction!) in self.onlyDark()}
                                      ))
@@ -553,6 +551,12 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     
     func autoDarkmode() {
         overrideUserInterfaceStyle = .unspecified
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
     
 
