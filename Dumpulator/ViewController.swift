@@ -175,7 +175,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     
     func convertString() {
         let tempResultDouble = resultDouble
-        if resultDouble > 999999999.0 || (resultDouble < 0.00000001 && resultDouble > -0.00000001) || resultDouble < -999999999 {
+        if resultDouble > 999999999.0 || (resultDouble < 0.00000001 && resultDouble > -0.00000001 && resultDouble != 0.0) || resultDouble < -999999999 {
             resultString = tempResultDouble.scientificFormatted
             rounded = true
         } else if checkIfNumberIsToLong(number: String(resultDouble), tryToAdd: false) {
@@ -543,14 +543,17 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     
     func onlyDark() {
         overrideUserInterfaceStyle = .dark
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     func onlyBright() {
         overrideUserInterfaceStyle = .light
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     func autoDarkmode() {
         overrideUserInterfaceStyle = .unspecified
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     func getDocumentsDirectory() -> URL {
