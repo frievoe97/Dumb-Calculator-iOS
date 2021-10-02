@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import MessageUI
+import SafariServices
 
-class ViewController: UIViewController {
+class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     
     var resultString: String = ""
     var resultDouble: Double = 0.0
@@ -17,9 +19,13 @@ class ViewController: UIViewController {
     let preResultNumber: Double? = nil
     var buttons = [0: "1", 1: "2", 2: "3", 3: "/", 4 : "4", 5 : "5", 6 : "6", 7 : "*", 8 : "7", 9 : "8", 10: "9", 11: "-", 12: "0", 13: ",", 14: "=", 15 : "+"]
     var buttonsValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "/", "*", "-", "+", "=", ","]
+    var lastButtonWasOperation = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .unspecified
+        showRoundedWarning()
+        menuButton.setTitle("", for: .normal)
         resultDisplay.text? = resultString
         updateTextFont()
     }
@@ -75,11 +81,8 @@ class ViewController: UIViewController {
     @IBAction func pressButton15(_ sender: Any) {
         pressButton(id: 15)
     }
-    
-    @IBAction func clear(_ sender: Any) {
-        resetAll()
-    }
-    
+
+
     @IBOutlet weak var button00: UIButton!
     @IBOutlet weak var button01: UIButton!
     @IBOutlet weak var button02: UIButton!
@@ -97,14 +100,63 @@ class ViewController: UIViewController {
     @IBOutlet weak var button14: UIButton!
     @IBOutlet weak var button15: UIButton!
     
-    @IBOutlet weak var roundedWarning: UITextField!
+    //@IBOutlet weak var roundedWarning: UITextField!
     
+    @IBOutlet weak var menuButton: UIButton!
+    @IBAction func pressMenuButton(_ sender: Any) {
+        showMenu()
+    }
     
+    @IBOutlet weak var roundedWarning: UIImageView!
+    
+    //@IBOutlet weak var roundedWarning: UITextField!
     
     // Functions
-    func updateDisplay() {
+    func updateDisplay(showDecimalpoint: Bool) {
         var output = resultString
         output = output.replacingOccurrences(of: ".", with: ",")
+        var preDecimalPoint: String
+        var postDecimalPoint: String
+        var preDecimalPointModified: String = ""
+        let outputArray = output.components(separatedBy: ",")
+        preDecimalPoint = outputArray[0]
+        if outputArray.count == 2 {
+            postDecimalPoint = outputArray[1]
+        } else {
+            postDecimalPoint = ""
+        }
+        var countToThree: Int = 0
+        for char in preDecimalPoint.reversed() {
+            if countToThree == 2 {
+                preDecimalPointModified += String(char)
+                preDecimalPointModified += "."
+                countToThree = -1
+            } else {
+                preDecimalPointModified += String(char)
+            }
+            countToThree += 1
+        }
+        preDecimalPoint = ""
+        for char in preDecimalPointModified.reversed() {
+            preDecimalPoint += String(char)
+        }
+        
+        if preDecimalPoint.first == "." {
+            preDecimalPoint.remove(at: preDecimalPoint.startIndex)
+        }
+        if postDecimalPoint != "" {
+            if checkIfNumberIsToLong(number: preDecimalPoint, tryToAdd: true) {
+                output = preDecimalPoint + "," + postDecimalPoint
+            } else {
+                output = preDecimalPoint
+            }
+        } else {
+            if showDecimalpoint {
+                output = preDecimalPoint + ","
+            } else {
+                output = preDecimalPoint
+            }
+        }
         updateTextFont()
         resultDisplay.text? = output
         showRoundedWarning()
@@ -112,9 +164,11 @@ class ViewController: UIViewController {
     
     func showRoundedWarning() {
         if rounded {
-            roundedWarning.text? = "."
+            roundedWarning.self.isHidden = false
+            //roundedWarning.text? = "."
         } else {
-            roundedWarning.text? = ""
+            roundedWarning.self.isHidden = true
+            //roundedWarning.text? = ""
         }
     }
     
@@ -124,29 +178,24 @@ class ViewController: UIViewController {
     }
     
     func convertString() {
-        
-        var tempResultDouble = resultDouble
-        let decimal = Decimal(resultDouble).significantFractionalDecimalDigits
-        
-        if (tempResultDouble > Double(Int.max)) {
-            print("The result is reseted")
-            resetAll()
-        } else {
-            if decimal > 4 {
-                tempResultDouble = (round(tempResultDouble * 10000) / 10000)
-                resultString = String(tempResultDouble)
-                if resultString == "0.0" {
-                    resultString = "0.0001"
-                }
-                rounded = true
+        let tempResultDouble = resultDouble
+        if resultDouble > 999999999.0 || resultDouble < 0.00000001 {
+            resultString = tempResultDouble.scientificFormatted
+            rounded = true
+        } else if checkIfNumberIsToLong(number: String(resultDouble), tryToAdd: false) {
+            if (Double(Int(tempResultDouble)) - tempResultDouble) == 0 {
+                resultString = String(Int(tempResultDouble))
             } else {
-                if (Double(Int(tempResultDouble)) - tempResultDouble) == 0 {
-                    resultString = String(Int(tempResultDouble))
-                } else {
-                    resultString = String(tempResultDouble)
-                }
-                rounded = false
+                resultString = String(tempResultDouble)
             }
+            rounded = false
+        } else {
+            let tempResultString = String(tempResultDouble)
+            let outputArray = tempResultString.components(separatedBy: ".")
+            //let numberOfPreDecimalNumbers = outputArray[0].count
+            let numberPostDecimalNumbers = 9 - outputArray[0].count
+            resultString = String((round(tempResultDouble * pow(10, Double(numberPostDecimalNumbers))) / pow(10, Double(numberPostDecimalNumbers))))
+            rounded = true
         }
     }
     
@@ -171,8 +220,8 @@ class ViewController: UIViewController {
         resultString = ""
         lastNumber = 0.0
         currentMode = ""
-        updateDisplay()
-        showAlert(name: "Error!", text: "Der gewählte Wert ist leider zu groß. Der Dumpulator wird wieder zurückgesetzt.")
+        rounded = false
+        updateDisplay(showDecimalpoint: false)
     }
     
     func switchButtons() {
@@ -221,30 +270,37 @@ class ViewController: UIViewController {
             resultDouble = lastNumber + resultDouble
             resultString = String(resultDouble)
             convertString()
-            updateDisplay()
+            updateDisplay(showDecimalpoint: false)
         case "-" :
             resultDouble = lastNumber - resultDouble
             resultString = String(resultDouble)
             convertString()
-            updateDisplay()
+            updateDisplay(showDecimalpoint: false)
         case "*" :
             resultDouble = lastNumber * resultDouble
             resultString = String(resultDouble)
             convertString()
-            updateDisplay()
+            updateDisplay(showDecimalpoint: false)
         case "/" :
-            resultDouble = lastNumber / resultDouble
-            resultString = String(resultDouble)
-            convertString()
-            updateDisplay()
+            if resultDouble == 0.0 {
+                resetAll()
+                showAlert(name: "Fehler!", text: "Es ist nicht erklaubt durch 0 zu teilen! Der Dumpulator wird wieder zurückgesetzt.")
+            } else {
+                resultDouble = lastNumber / resultDouble
+                resultString = String(resultDouble)
+                convertString()
+                updateDisplay(showDecimalpoint: false)
+
+            }
         case "=" :
             convertString()
-            updateDisplay()
+            updateDisplay(showDecimalpoint: false)
         case ""  :
             convertString()
-            updateDisplay()
+            updateDisplay(showDecimalpoint: false)
         default :
             resetAll()
+            showAlert(name: "Fehler!", text: "Falsche Eingabe! Der Dumpulator wird wieder zurückgesetzt.")
         }
     }
     
@@ -255,54 +311,91 @@ class ViewController: UIViewController {
                 currentMode = ""
                 rounded = false
             }
-            resultString += String(buttons[id]!)
-            resultDouble = Double(resultString)!
-            updateDisplay()
+            if checkIfNumberIsToLong(number: nil, tryToAdd: true) {
+                resultString += String(buttons[id]!)
+                resultDouble = Double(resultString)!
+            }
+            if resultString.contains(",") {
+                updateDisplay(showDecimalpoint: true)
+            } else {
+                updateDisplay(showDecimalpoint: false)
+            }
+            lastButtonWasOperation = false
         } else if buttons[id] == "=" {
             calculate(opearation: currentMode)
             markButton()
             currentMode = "="
             lastNumber = resultDouble
+            resultString = ""
+            lastButtonWasOperation = true
         } else if buttons[id] == "," {
+            //print("String: ", resultString, "Double: ", resultDouble, "Mode: ", currentMode)
             if !resultString.contains(".") {
-                if currentMode == "=" {
+                if currentMode == "=" && checkIfNumberIsToLong(number: nil, tryToAdd: true) {
                     resultString = "0."
                     currentMode = ""
                     rounded = false
                 } else {
-                    resultString += "."
+                    if checkIfNumberIsToLong(number: nil, tryToAdd: true) {
+                        if resultString == "" {
+                            resultString = "0."
+                        } else {
+                            resultString += "."
+                        }
+                    }
                 }
-                updateDisplay()
+                updateDisplay(showDecimalpoint: true)
             }
+            lastButtonWasOperation = false
             //switchButtons()
         } else if buttons[id] == "+" {
-            calculate(opearation: currentMode)
-            markButton()
-            currentMode = "+"
-            lastNumber = resultDouble
-            resultString = ""
-            switchButtons()
+            if lastButtonWasOperation {
+                currentMode = "+"
+            } else {
+                calculate(opearation: currentMode)
+                markButton()
+                currentMode = "+"
+                lastNumber = resultDouble
+                resultString = ""
+                switchButtons()
+            }
+            lastButtonWasOperation = true
         } else if buttons[id] == "-" {
-            calculate(opearation: currentMode)
-            markButton()
-            currentMode = "-"
-            lastNumber = resultDouble
-            resultString = ""
-            switchButtons()
+            if lastButtonWasOperation {
+                currentMode = "-"
+            } else {
+                calculate(opearation: currentMode)
+                markButton()
+                currentMode = "-"
+                lastNumber = resultDouble
+                resultString = ""
+                switchButtons()
+            }
+            lastButtonWasOperation = true
         } else if buttons[id] == "*" {
-            calculate(opearation: currentMode)
-            markButton()
-            currentMode = "*"
-            lastNumber = resultDouble
-            resultString = ""
-            switchButtons()
+            if lastButtonWasOperation {
+                currentMode = "*"
+            } else {
+                calculate(opearation: currentMode)
+                markButton()
+                currentMode = "*"
+                lastNumber = resultDouble
+                resultString = ""
+                switchButtons()
+            }
+            lastButtonWasOperation = true
         } else if buttons[id] == "/" {
-            calculate(opearation: currentMode)
-            markButton()
-            currentMode = "/"
-            lastNumber = resultDouble
-            resultString = ""
-            switchButtons()
+            if lastButtonWasOperation {
+                currentMode = "/"
+            } else {
+                calculate(opearation: currentMode)
+                markButton()
+                currentMode = "/"
+                lastNumber = resultDouble
+                resultString = ""
+                switchButtons()
+            }
+            lastButtonWasOperation = true
         }
     }
     
@@ -333,12 +426,156 @@ class ViewController: UIViewController {
                                       style: UIAlertAction.Style.default,
                                       handler: { _ in}
                                      ))
-            self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showMenu() {
+        let alert = UIAlertController(title: "Menü", message: "Hinweis: Wenn der rote Punkt leuchtet, ist das angezeigte Ergebnis gerundet. Es wird mit dem nicht gerundeten Ergebnis weitergerechnet.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Informationen",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {[self](alert: UIAlertAction!) in self.showInformations()}
+                                     ))
+        alert.addAction(UIAlertAction(title: "Darstellungsoptionen",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {[self](alert: UIAlertAction!) in self.showSetting()}
+                                     ))
+        alert.addAction(UIAlertAction(title: "Zurück",
+                                      style: UIAlertAction.Style.default,
+                                      handler: { _ in}
+                                     ))
+        alert.addAction(UIAlertAction(title: "Reset",
+                                      style: UIAlertAction.Style.destructive,
+                                      handler: {[self](alert: UIAlertAction!) in self.resetMenu()}
+                                     ))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showInformations() {
+        let alert = UIAlertController(title: "Informationen", message: "Das Projekt \"Dumpulator\" ist ein Open Source Projekt. Bei Fragen, Hinweisen oder Fehlern senden Sie gerne eine E-Mail und für die Weiterentwicklung kann ein Pull-Request im GitHub Repository erstellt werden.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Zurück",
+                                      style: UIAlertAction.Style.default,
+                                      handler: { _ in}
+                                     ))
+        alert.addAction(UIAlertAction(title: "E-Mail",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {[self](alert: UIAlertAction!) in self.sendEmail()}
+                                     ))
+        alert.addAction(UIAlertAction(title: "GitHub Repository",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {[self](alert: UIAlertAction!) in self.visitGitHUb()}
+                                     ))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showSetting() {
+        let alert = UIAlertController(title: "Darstellungsoptionen", message: "", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Automatisch",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {[self](alert: UIAlertAction!) in self.autoDarkmode()}
+                                     ))
+        alert.addAction(UIAlertAction(title: "Helles Erscheinungsbild",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {[self](alert: UIAlertAction!) in self.onlyBright()}
+                                     ))
+        alert.addAction(UIAlertAction(title: "Dunkles Erscheinungsbild",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {[self](alert: UIAlertAction!) in self.onlyDark()}
+                                     ))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func resetMenu() {
+        resetAll()
+        showAlert(name: "Hinweis!", text: "Der Dumpulator wird wieder zurückgesetzt.")
+    }
+    
+    func visitGitHUb() {
+        let url = URL(string: "https://github.com/frievoe97/dumpulator")
+        let vc = SFSafariViewController(url: url!)
+        present(vc, animated: true)
+    }
+    
+    func sendEmail() {
+        if !MFMailComposeViewController.canSendMail() {
+            print("Mail services are not available")
+            return
+        } else {
+            let composeVC = MFMailComposeViewController()
+            composeVC.mailComposeDelegate = self
+             
+            // Configure the fields of the interface.
+            composeVC.setToRecipients(["dontUse@me.com"])
+            composeVC.setSubject("Dumpulator Feedback")
+             
+            // Present the view controller modally.
+            self.present(composeVC, animated: true, completion: nil)
         }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+    
+    func checkIfNumberIsToLong(number: String?, tryToAdd: Bool) -> Bool {
+        var value: String = ""
+        var minNumber = 9
+        if !tryToAdd {
+            minNumber = 10
+        }
+        if number != nil {
+            value = number!
+        } else {
+            value = resultString
+        }
+        let tempResult: String
+        let outputArray = value.components(separatedBy: ".")
+        if outputArray.count > 1 && outputArray[1] == "0" {
+            tempResult = outputArray[0]
+        } else {
+            tempResult = value.replacingOccurrences(of: ".", with: "")
+        }
+        if tempResult.count >= minNumber {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func onlyDark() {
+        overrideUserInterfaceStyle = .dark
+    }
+    
+    func onlyBright() {
+        overrideUserInterfaceStyle = .light
+    }
+    
+    func autoDarkmode() {
+        overrideUserInterfaceStyle = .unspecified
+    }
+    
+
 }
 
 extension Decimal {
     var significantFractionalDecimalDigits: Int {
         return max(-exponent, 0)
+    }
+}
+
+extension Formatter {
+    static let scientific: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .scientific
+        formatter.positiveFormat = "0.###E+0"
+        formatter.exponentSymbol = "e"
+        return formatter
+    }()
+}
+
+extension Numeric {
+    var scientificFormatted: String {
+        return Formatter.scientific.string(for: self) ?? ""
     }
 }
