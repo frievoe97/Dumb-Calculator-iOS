@@ -1,6 +1,6 @@
 # Contact
 
-friedrich.voelkers@me.com
+E-Mail: friedrich.voelkers@me.com
 
 # Datenschutzerklärung
 
