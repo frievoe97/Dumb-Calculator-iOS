@@ -1,4 +1,8 @@
 # Dumb Calculator (iOS) (German version below)
+
+The calculator that was bad at math.
+You were not good at math and feel arrogant from other calculators? Then Dumb Calculator is exactly what you need. He doesn't fool anyone and that's exactly what he doesn't claim to do. He is simply an honest calculator who also makes mistakes sometimes. 
+
 ## Privacy policy
 No personal data is collected or processed when using the app.
 ## Versions
