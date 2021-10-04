@@ -1,6 +1,7 @@
 # Dumb Calculator (iOS) (German version below)
 
 The calculator that was bad at math.
+
 You were not good at math and feel arrogant from other calculators? Then Dumb Calculator is exactly what you need. He doesn't fool anyone and that's exactly what he doesn't claim to do. He is simply an honest calculator who also makes mistakes sometimes. 
 
 ## Privacy policy
@@ -16,6 +17,9 @@ No personal data is collected or processed when using the app.
 Email: friedrich.voelkers@me.com
 
 # Dumb Calculator (iOS)
+Der Taschenrechner, der schlecht in Mathe war.
+
+Sie waren nicht gut in Mathe und fühlen sich von anderen Taschenrechnern überheblich? Dann ist Dumb Calculator genau das, was Sie brauchen. Er macht niemandem etwas vor und genau das behauptet er auch nicht. Er ist einfach ein ehrlicher Taschenrechner, der auch mal Fehler macht. 
 ## Datenschutz
 Bei der Nutzung der App werden keine personenbezogenen Daten erfasst bzw. bearbeitet.
 ## Versionen
