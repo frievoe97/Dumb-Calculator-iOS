@@ -490,7 +490,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func visitGitHUb() {
-        let url = URL(string: "https://github.com/frievoe97/Dump-Calculator-iOS")
+        let url = URL(string: "https://github.com/frievoe97/Dumb-Calculator-iOS")
         let vc = SFSafariViewController(url: url!)
         present(vc, animated: true)
     }
