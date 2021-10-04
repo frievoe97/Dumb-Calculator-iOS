@@ -1,6 +1,6 @@
 Solarized dark             |  Solarized Ocean
 :-------------------------:|:-------------------------:
-![](https://...Dark.png)  |  ![](https://...Ocean.png)
+!(sources/images/screenshots/1242x2688bb.png)  |  ![](https://...Ocean.png)
 
 
 # Dumb Calculator (iOS) (German version below)
