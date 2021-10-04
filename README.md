@@ -19,7 +19,7 @@ Email: friedrich.voelkers@me.com
 # Dumb Calculator (iOS)
 Der Taschenrechner, der schlecht in Mathe war.
 
-Sie waren nicht gut in Mathe und fühlen sich von anderen Taschenrechnern überheblich? Dann ist Dumb Calculator genau das, was Sie brauchen. Er macht niemandem etwas vor und genau das behauptet er auch nicht. Er ist einfach ein ehrlicher Taschenrechner, der auch mal Fehler macht. 
+Du warst nicht gut in Mathe und fühlst sich von anderen Taschenrechnern überheblich behandelt? Dann ist Dumb Calculator genau das, was Sie brauchen. Er macht niemandem etwas vor und genau das behauptet er auch nicht. Er ist einfach ein ehrlicher Taschenrechner, der auch mal Fehler macht. 
 ## Datenschutz
 Bei der Nutzung der App werden keine personenbezogenen Daten erfasst bzw. bearbeitet.
 ## Versionen
