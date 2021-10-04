@@ -15,6 +15,17 @@ No personal data is collected or processed when using the app.
 ### Version 1.0
 - This is the first version of the Dump Calculator. This version still contains minor bugs that will be fixed in upcoming versions and serves as a public beta that is not yet advertised.
 
+## Upcoming features
+Feel free to email or create a pull request if you have additional ideas
+
+- Make access to the menu clearer
+- Reorder keys even if last arithmetic operation was "="
+- Show tutorial when app is opened for the first time
+- Show info of the last update
+- Make the result copyable
+- Implement landscape mode
+- ...
+
 ## Contact
 Email: friedrich.voelkers@me.com
 
@@ -32,6 +43,17 @@ Bei der Nutzung der App werden keine personenbezogenen Daten erfasst bzw. bearbe
 
 ### Version 1.0
 - Dies ist die erste Version des Dump Calculators. Diese Version enthält noch kleine Fehler, die in den kommenden Versionen behoben werden und dient als öffentliche Beta, die noch nicht beworben wird.
+
+## Kommende Features
+Gerne bei weiteren eine E-Mail schreiben oder ein Pull Request erstellen
+
+- Zugang zum Menü deutlicher gestalten
+- Tasten auch neu ordnen, wenn die letzte Rechenoperation "=" war
+- Tutorial anzeigen, wenn die App zum ersten Mal geöffnet wird
+- Infos des letzten Updates anzeigen
+- Das Ergebnis kopierbar machen
+- Landscape Modus implementieren
+- ...
 
 ## Kontakt
 E-Mail: friedrich.voelkers@me.com
