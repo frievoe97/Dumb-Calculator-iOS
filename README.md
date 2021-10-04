@@ -1,3 +1,8 @@
+Solarized dark             |  Solarized Ocean
+:-------------------------:|:-------------------------:
+![](https://...Dark.png)  |  ![](https://...Ocean.png)
+
+
 # Dumb Calculator (iOS) (German version below)
 
 The calculator that was bad at math.
