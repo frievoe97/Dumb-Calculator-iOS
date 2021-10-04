@@ -11,8 +11,6 @@ No personal data is collected or processed when using the app.
 ## Contact
 Email: friedrich.voelkers@me.com
 
-Translated with www.DeepL.com/Translator (free version)
-
 # Dumb Calculator (iOS)
 ## Datenschutz
 Bei der Nutzung der App werden keine personenbezogenen Daten erfasst bzw. bearbeitet.
