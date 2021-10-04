@@ -236,8 +236,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCh-vJ-cjo">
                                 <rect key="frame" x="5" y="29" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="8pn-bj-Tkc"/>
-                                    <constraint firstAttribute="width" constant="40" id="fLq-Q3-Kqp"/>
+                                    <constraint firstAttribute="width" constant="40" id="4d0-x4-yo3"/>
+                                    <constraint firstAttribute="height" constant="40" id="Pg1-QP-8YS"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain"/>

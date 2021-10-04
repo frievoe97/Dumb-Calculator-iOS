@@ -280,7 +280,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
         case "/" :
             if resultDouble == 0.0 {
                 resetAll()
-                showAlert(name: "Error!", text: "It is not allowed to divide by zero! The \"Dumpulator\" is reset again.")
+                showAlert(name: "Error!", text: "It is not allowed to divide by zero! The Dumb Calculator is reset again.")
             } else {
                 resultDouble = lastNumber / resultDouble
                 resultString = String(resultDouble)
@@ -296,7 +296,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
             updateDisplay(showDecimalpoint: false)
         default :
             resetAll()
-            showAlert(name: "Error!", text: "Incorrect input! The \"Dumpulator\" is reset again.")
+            showAlert(name: "Error!", text: "Incorrect input! The Dumb Calculator is reset again.")
         }
     }
     
@@ -447,7 +447,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func showInformations() {
-        let alert = UIAlertController(title: "Information", message: "The project \"Dumpulator\" is an open source project. For further development a pull request can be created in the GitHub repository.", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Information", message: "The project Dumb Calculator is an open source project. For further development a pull request can be created in the GitHub repository.", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Back",
                                       style: UIAlertAction.Style.default,
                                       handler: { _ in}
@@ -486,11 +486,11 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     
     func resetMenu() {
         resetAll()
-        showAlert(name: "Info", text: "The \"Dumpulator\" is reset again.")
+        showAlert(name: "Info", text: "The Dumb Calculator is reset again.")
     }
     
     func visitGitHUb() {
-        let url = URL(string: "https://github.com/frievoe97/dumpulator")
+        let url = URL(string: "https://github.com/frievoe97/Dump-Calculator-iOS")
         let vc = SFSafariViewController(url: url!)
         present(vc, animated: true)
     }
