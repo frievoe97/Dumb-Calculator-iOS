@@ -39,12 +39,12 @@ Herunterladen aus dem [Apple App Store](https://apps.apple.com/de/app/dumb-calcu
 ## Datenschutz
 Bei der Nutzung der App werden keine personenbezogenen Daten erfasst bzw. bearbeitet.
 ## Versionen
+### Version 1.0.2
+- App Icon Fehler wieder behoben (das App Icon ist im Simulator und im App Store sichtbar, aber nicht auf dem Homescreen)
 ### Version 1.0.1
 - Fehler im App Icon behoben und App Icon geändert
-
 ### Version 1.0
 - Dies ist die erste Version des Dump Calculators. Diese Version enthält noch kleine Fehler, die in den kommenden Versionen behoben werden und dient als öffentliche Beta, die noch nicht beworben wird.
-
 ## Kommende Features
 Gerne bei weiteren eine E-Mail schreiben oder ein Pull Request erstellen
 
