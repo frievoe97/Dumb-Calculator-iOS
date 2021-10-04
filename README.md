@@ -4,6 +4,8 @@ The calculator that was bad at math.
 
 You were not good at math and feel arrogant from other calculators? Then Dumb Calculator is exactly what you need. He doesn't fool anyone and that's exactly what he doesn't claim to do. He is simply an honest calculator who also makes mistakes sometimes. 
 
+Download from [Apple App Store](https://apps.apple.com/de/app/dumb-calculator/id1588569890)
+
 ## Privacy policy
 No personal data is collected or processed when using the app.
 ## Versions
@@ -20,6 +22,8 @@ Email: friedrich.voelkers@me.com
 Der Taschenrechner, der schlecht in Mathe war.
 
 Du warst nicht gut in Mathe und fühlst sich von anderen Taschenrechnern überheblich behandelt? Dann ist Dumb Calculator genau das, was Sie brauchen. Er macht niemandem etwas vor und genau das behauptet er auch nicht. Er ist einfach ein ehrlicher Taschenrechner, der auch mal Fehler macht. 
+
+Herunterladen aus dem [Apple App Store](https://apps.apple.com/de/app/dumb-calculator/id1588569890)
 ## Datenschutz
 Bei der Nutzung der App werden keine personenbezogenen Daten erfasst bzw. bearbeitet.
 ## Versionen
