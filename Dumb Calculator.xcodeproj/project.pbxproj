@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		61CDFC1727049CD300A870D6 /* Dumpulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dumpulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		61CDFC1727049CD300A870D6 /* Dumb Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dumb Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61CDFC1A27049CD300A870D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61CDFC1C27049CD300A870D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		61CDFC1E27049CD300A870D6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		61CDFC1827049CD300A870D6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				61CDFC1727049CD300A870D6 /* Dumpulator.app */,
+				61CDFC1727049CD300A870D6 /* Dumb Calculator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,9 +70,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		61CDFC1627049CD300A870D6 /* Dumpulator */ = {
+		61CDFC1627049CD300A870D6 /* Dumb Calculator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 61CDFC2B27049CD500A870D6 /* Build configuration list for PBXNativeTarget "Dumpulator" */;
+			buildConfigurationList = 61CDFC2B27049CD500A870D6 /* Build configuration list for PBXNativeTarget "Dumb Calculator" */;
 			buildPhases = (
 				61CDFC1327049CD300A870D6 /* Sources */,
 				61CDFC1427049CD300A870D6 /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = Dumpulator;
+			name = "Dumb Calculator";
 			productName = "Hello iOS";
-			productReference = 61CDFC1727049CD300A870D6 /* Dumpulator.app */;
+			productReference = 61CDFC1727049CD300A870D6 /* Dumb Calculator.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -101,7 +101,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 61CDFC1227049CD300A870D6 /* Build configuration list for PBXProject "Dumpulator" */;
+			buildConfigurationList = 61CDFC1227049CD300A870D6 /* Build configuration list for PBXProject "Dumb Calculator" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -114,7 +114,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				61CDFC1627049CD300A870D6 /* Dumpulator */,
+				61CDFC1627049CD300A870D6 /* Dumb Calculator */,
 			);
 		};
 /* End PBXProject section */
@@ -288,7 +288,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H5H9H7A6U5;
 				INFOPLIST_FILE = Dumpulator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
@@ -296,6 +296,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "Friedrich-Voelkers.Dumpulator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -310,7 +311,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H5H9H7A6U5;
 				INFOPLIST_FILE = Dumpulator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
@@ -318,6 +319,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "Friedrich-Voelkers.Dumpulator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -328,7 +330,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		61CDFC1227049CD300A870D6 /* Build configuration list for PBXProject "Dumpulator" */ = {
+		61CDFC1227049CD300A870D6 /* Build configuration list for PBXProject "Dumb Calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				61CDFC2927049CD500A870D6 /* Debug */,
@@ -337,7 +339,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		61CDFC2B27049CD500A870D6 /* Build configuration list for PBXNativeTarget "Dumpulator" */ = {
+		61CDFC2B27049CD500A870D6 /* Build configuration list for PBXNativeTarget "Dumb Calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				61CDFC2C27049CD500A870D6 /* Debug */,
