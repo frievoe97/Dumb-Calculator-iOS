@@ -9,9 +9,10 @@ Download from [Apple App Store](https://apps.apple.com/de/app/dumb-calculator/id
 ## Privacy policy
 No personal data is collected or processed when using the app.
 ## Versions
+### Version 1.0.2
+- fixed App Icon bug again (the app icon is visible on the simulator and in the App Store but not on the homescreen)
 ### Version 1.0.1
 - Fixed bug in app icon and changed app icon
-
 ### Version 1.0
 - This is the first version of the Dump Calculator. This version still contains minor bugs that will be fixed in upcoming versions and serves as a public beta that is not yet advertised.
 
