@@ -11,7 +11,7 @@ import SafariServices
 
 class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     
-    var resultString: String = ""
+    var resultString: String = "0"
     var resultDouble: Double = 0.0
     var lastNumber: Double = 0.0
     var currentMode = ""
@@ -20,12 +20,13 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     var buttons = [0: "1", 1: "2", 2: "3", 3: "/", 4 : "4", 5 : "5", 6 : "6", 7 : "*", 8 : "7", 9 : "8", 10: "9", 11: "-", 12: "0", 13: ",", 14: "=", 15 : "+"]
     var buttonsValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "/", "*", "-", "+", "=", ","]
     var lastButtonWasOperation = false
+    var currentDisplayMode = "Automatic"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .unspecified
         showRoundedWarning()
-        menuButton.setTitle("", for: .normal)
+        //menuButton.setTitle("", for: .normal)
         resultDisplay.text? = resultString
         updateTextFont()
     }
@@ -82,7 +83,13 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
         pressButton(id: 15)
     }
 
-
+    @IBAction func menuButton(_ sender: Any) {
+        showMenu()
+    }
+    @IBAction func ACButton(_ sender: Any) {
+        resetMenu()
+    }
+    
     @IBOutlet weak var button00: UIButton!
     @IBOutlet weak var button01: UIButton!
     @IBOutlet weak var button02: UIButton!
@@ -100,10 +107,6 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var button14: UIButton!
     @IBOutlet weak var button15: UIButton!
     
-    @IBOutlet weak var menuButton: UIButton!
-    @IBAction func pressMenuButton(_ sender: Any) {
-        showMenu()
-    }
     
     @IBOutlet weak var roundedWarning: UIImageView!
     
@@ -140,6 +143,11 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
         if preDecimalPoint.first == "." {
             preDecimalPoint.remove(at: preDecimalPoint.startIndex)
         }
+        if preDecimalPoint.prefix(2) == "-." {
+            preDecimalPoint.remove(at: preDecimalPoint.startIndex)
+            preDecimalPoint.remove(at: preDecimalPoint.startIndex)
+            preDecimalPoint = "-" + preDecimalPoint
+        }
         if postDecimalPoint != "" {
             if checkIfNumberIsToLong(number: preDecimalPoint, tryToAdd: true) {
                 output = preDecimalPoint + "," + postDecimalPoint
@@ -160,7 +168,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     
     func showRoundedWarning() {
         if rounded {
-            roundedWarning.self.isHidden = false
+            roundedWarning.self.isHidden = true // false
             //roundedWarning.text? = "."
         } else {
             roundedWarning.self.isHidden = true
@@ -213,7 +221,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
         button13.setTitle(buttons[13], for: .normal)
         button14.setTitle(buttons[14], for: .normal)
         button15.setTitle(buttons[15], for: .normal)
-        resultString = ""
+        resultString = "0"
         lastNumber = 0.0
         currentMode = ""
         rounded = false
@@ -241,7 +249,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
         button13.setTitle("", for: .normal)
         button14.setTitle("", for: .normal)
         button15.setTitle("", for: .normal)
-        
+                
         button00.setTitle(buttons[0], for: .normal)
         button01.setTitle(buttons[1], for: .normal)
         button02.setTitle(buttons[2], for: .normal)
@@ -261,6 +269,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func calculate(opearation: String) {
+        //print(lastNumber, opearation, resultDouble)
         switch opearation {
         case "+" :
             resultDouble = lastNumber + resultDouble
@@ -303,12 +312,17 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     func pressButton(id: Int) {
         if (Int(buttons[id]!) != nil) {
             if currentMode == "=" {
-                resultString = ""
+                resultString = "0"
                 currentMode = ""
                 rounded = false
             }
             if checkIfNumberIsToLong(number: nil, tryToAdd: true) {
-                resultString += String(buttons[id]!)
+                if resultString == "0" {
+                    resultString = String(buttons[id]!)
+                } else {
+                    resultString += String(buttons[id]!)
+                }
+                
                 resultDouble = Double(resultString)!
             }
             if resultString.contains(",") {
@@ -347,6 +361,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
         } else if buttons[id] == "+" {
             if lastButtonWasOperation {
                 currentMode = "+"
+                switchButtons()
             } else {
                 calculate(opearation: currentMode)
                 markButton()
@@ -359,6 +374,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
         } else if buttons[id] == "-" {
             if lastButtonWasOperation {
                 currentMode = "-"
+                switchButtons()
             } else {
                 calculate(opearation: currentMode)
                 markButton()
@@ -371,6 +387,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
         } else if buttons[id] == "*" {
             if lastButtonWasOperation {
                 currentMode = "*"
+                switchButtons()
             } else {
                 calculate(opearation: currentMode)
                 markButton()
@@ -383,6 +400,7 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
         } else if buttons[id] == "/" {
             if lastButtonWasOperation {
                 currentMode = "/"
+                switchButtons()
             } else {
                 calculate(opearation: currentMode)
                 markButton()
@@ -426,7 +444,8 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func showMenu() {
-        let alert = UIAlertController(title: "Menu", message: "Note: If the red dot is lit, the displayed result is rounded. The calculation is continued with the non-rounded result.", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Menu", message: "", preferredStyle: UIAlertController.Style.alert)
+        // Note: If the red dot is lit, the displayed result is rounded. The calculation is continued with the non-rounded result.
         alert.addAction(UIAlertAction(title: "Informationen",
                                       style: UIAlertAction.Style.default,
                                       handler: {[self](alert: UIAlertAction!) in self.showInformations()}
@@ -436,8 +455,8 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
                                       handler: {[self](alert: UIAlertAction!) in self.showSetting()}
                                      ))
         alert.addAction(UIAlertAction(title: "Back",
-                                      style: UIAlertAction.Style.default,
-                                      handler: { _ in}
+                                      style: UIAlertAction.Style.cancel,
+                                      handler: nil
                                      ))
         alert.addAction(UIAlertAction(title: "Reset",
                                       style: UIAlertAction.Style.destructive,
@@ -467,12 +486,12 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func showSetting() {
-        let alert = UIAlertController(title: "Display options", message: "", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Automattic",
+        let alert = UIAlertController(title: "Display options", message: "Current Mode: " + currentDisplayMode, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Automatic",
                                       style: UIAlertAction.Style.default,
                                       handler: {[self](alert: UIAlertAction!) in self.autoDarkmode()}
                                      ))
-        alert.addAction(UIAlertAction(title: "Bright appearanced",
+        alert.addAction(UIAlertAction(title: "Bright appearance",
                                       style: UIAlertAction.Style.default,
                                       handler: {[self](alert: UIAlertAction!) in self.onlyBright()}
                                      ))
@@ -480,13 +499,17 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
                                       style: UIAlertAction.Style.default,
                                       handler: {[self](alert: UIAlertAction!) in self.onlyDark()}
                                      ))
+        alert.addAction(UIAlertAction(title: "Back",
+                                      style: UIAlertAction.Style.cancel,
+                                      handler: {[self](alert: UIAlertAction!) in self.showMenu()}
+                                     ))
 
         self.present(alert, animated: true, completion: nil)
     }
     
     func resetMenu() {
         resetAll()
-        showAlert(name: "Info", text: "The Dumb Calculator is reset again.")
+        //showAlert(name: "Info", text: "The Dumb Calculator is reset again.")
     }
     
     func visitGitHUb() {
@@ -543,16 +566,19 @@ class ViewController:  UIViewController, MFMailComposeViewControllerDelegate {
     
     func onlyDark() {
         overrideUserInterfaceStyle = .dark
+        currentDisplayMode = "Dark appearance"
         setNeedsStatusBarAppearanceUpdate()
     }
     
     func onlyBright() {
         overrideUserInterfaceStyle = .light
+        currentDisplayMode = "Bright appearance"
         setNeedsStatusBarAppearanceUpdate()
     }
     
     func autoDarkmode() {
         overrideUserInterfaceStyle = .unspecified
+        currentDisplayMode = "Automatic"
         setNeedsStatusBarAppearanceUpdate()
     }
     

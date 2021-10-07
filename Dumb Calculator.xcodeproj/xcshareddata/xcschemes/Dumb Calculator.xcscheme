@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "61CDFC1627049CD300A870D6"
-               BuildableName = "Dumpulator.app"
+               BuildableName = "Dumb Calculator.app"
                BlueprintName = "Dumb Calculator"
                ReferencedContainer = "container:Dumb Calculator.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "61CDFC1627049CD300A870D6"
-            BuildableName = "Dumpulator.app"
+            BuildableName = "Dumb Calculator.app"
             BlueprintName = "Dumb Calculator"
             ReferencedContainer = "container:Dumb Calculator.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "61CDFC1627049CD300A870D6"
-            BuildableName = "Dumpulator.app"
+            BuildableName = "Dumb Calculator.app"
             BlueprintName = "Dumb Calculator"
             ReferencedContainer = "container:Dumb Calculator.xcodeproj">
          </BuildableReference>
