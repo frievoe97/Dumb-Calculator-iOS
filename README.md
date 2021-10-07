@@ -1,5 +1,5 @@
-![](/source/images/screenshots/1242x2688bb.png)  |  ![](/source/images/screenshots/1242x2688bb-2.png) | ![](/source/images/screenshots/1242x2688bb-3.png)  |  ![](/source/images/screenshots/1242x2688bb-4.png)
-|---|---|---|---|
+![](/source/screenshots/v1.1.0/iPhone_11_1.png)  |  ![](/source/screenshots/v1.1.0/iPhone_11_2.png) | ![](/source/screenshots/v1.1.0/iPhone_11_3.png) 
+|---|---|---|
 
 # Dumb Calculator (iOS) (German version below)
 
