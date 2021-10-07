@@ -12,6 +12,12 @@ Download from [Apple App Store](https://apps.apple.com/de/app/dumb-calculator/id
 ## Privacy policy
 No personal data is collected or processed when using the app.
 ## Versions
+### Version 1.1.0
+- There is now a menu and an AC (All Clear) button
+- The Dump Calculator is now also confused if the last arithmetic operation was a "=" character
+- The display menu now shows the current mode
+- Fixed a bug where negative numbers had a thousand point between the minus sign and the number
+- A zero is now displayed at Start and Reset
 ### Version 1.0.2
 - fixed App Icon bug again (the app icon is visible on the simulator and in the App Store but not on the homescreen)
 ### Version 1.0.1
@@ -42,6 +48,12 @@ Herunterladen aus dem [Apple App Store](https://apps.apple.com/de/app/dumb-calcu
 ## Datenschutz
 Bei der Nutzung der App werden keine personenbezogenen Daten erfasst bzw. bearbeitet.
 ## Versionen
+### Version 1.1.0
+- Es gibt jetzt ein Menü und einen AC-Button
+- Der Dump Calculator wird nun auch verwirrt, wenn die letzte arithmetische Operation ein "="-Zeichen war
+- Das Darstellungsmenü zeigt jetzt den aktuellen Modus an
+- Ein Fehler wurde behoben, bei dem negative Zahlen einen Tausenderpunkt zwischen dem Minuszeichen und der Zahl hatten.
+- Bei Start und Reset wird jetzt eine Null angezeigt
 ### Version 1.0.2
 - App Icon Fehler wieder behoben (das App Icon ist im Simulator und im App Store sichtbar, aber nicht auf dem Homescreen)
 ### Version 1.0.1
