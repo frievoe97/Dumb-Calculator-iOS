@@ -37,7 +37,7 @@ Feel free to email or create a pull request if you have additional ideas
 - ...
 
 ## Contact
-Email: friedrich.voelkers@me.com
+Email: apps@friedrichvoelkers.de
 
 # Dumb Calculator (iOS)
 Der Taschenrechner, der schlecht in Mathe war.
@@ -72,4 +72,4 @@ Gerne bei weiteren eine E-Mail schreiben oder ein Pull Request erstellen
 - ...
 
 ## Kontakt
-E-Mail: friedrich.voelkers@me.com
+E-Mail: apps@friedrichvoelkers.de
