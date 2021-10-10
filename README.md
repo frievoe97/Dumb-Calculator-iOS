@@ -34,6 +34,7 @@ Feel free to email or create a pull request if you have additional ideas
 - Show info of the last update
 - Make the result copyable
 - Implement landscape mode
+- Android Version
 - ...
 
 ## Contact
@@ -69,6 +70,7 @@ Gerne bei weiteren eine E-Mail schreiben oder ein Pull Request erstellen
 - Infos des letzten Updates anzeigen
 - Das Ergebnis kopierbar machen
 - Landscape Modus implementieren
+- Android Version
 - ...
 
 ## Kontakt
